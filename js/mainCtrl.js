@@ -7,6 +7,7 @@ app.controller('mainCtrl', function($scope, itunesService){
   $scope.gridOptions = { 
       data: 'songData',
       height: '110px',
+      showFilter: true,
       sortInfo: {fields: ['Song', 'Artist', 'Collection', 'Type'], directions: ['asc']},
       columnDefs: [
         {field: 'Play', displayName: 'Play', width: '40px', cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><a href="{{row.getProperty(col.field)}}"><img src="http://www.icty.org/x/image/Miscellaneous/play_icon30x30.png"></a></div>'},
@@ -14,7 +15,10 @@ app.controller('mainCtrl', function($scope, itunesService){
         {field: 'Collection', displayName: 'Collection'},
         {field: 'AlbumArt', displayName: 'Album Art', width: '110px', cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><img src="{{row.getProperty(col.field)}}"></div>'},
         {field: 'Type', displayName: 'Type'},
+        {field: 'TrackName', displayName: 'Track Name'},
         {field: 'CollectionPrice', displayName: 'Collection Price'},
+        {field: 'ReleaseDate', displayName: 'Release Date', cellFilter: 'date:\'MM-dd-yyyy\''},
+        {field: 'ShortDescription', displayName: 'Description'}
       ]
   };
 
@@ -27,10 +31,13 @@ app.controller('mainCtrl', function($scope, itunesService){
 
   //Now write a function that will call the method on the itunesService that is responsible for getting the data from iTunes, whenever the user clicks the submit button
   //*remember, that method should be expecting an artist name. The artist name is coming from the input box on index.html, head over there and check if that input box is tied to any specific model we could use.
-  //Also note that that method should be retuning a promise, so you could use .then in this function.
+  //Also note that that method should be returning a promise, so you could use .then in this function.
     
-    //Code here
-
+  $scope.getSongData = function(artist) {
+    itunesService.getArtist(artist).then(function(response){
+        $scope.songData = response;
+    });
+  }
 
   //Check that the above method is working by entering a name into the input field on your web app, and then console.log the result
 

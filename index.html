@@ -11,12 +11,18 @@
       <div class="container">
         <div id="myContainer">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-music"></span> DevTunes</a>
+            <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-music"></span> JeffTunes</a>
           </div>
           <form class="navbar-form navbar-left" role="search">
             <div class="form-group">
-              <input type="text" class="form-control" ng-model="artist" placeholder="Artist Name" >
-              <button class="btn btn-primary" ng-click="getSongData()"> Submit </button>
+              <input type="text" class="form-control" ng-model="artist" placeholder="Artist or Movie Name" >
+              <button class="btn btn-primary" ng-click="getSongData(artist)"> Submit </button>
+          <select>
+                <option value="music">Music</option>
+                <option value="movie">Movie</option>
+                <option value="podcast">Podcast</option>
+                <option value="audiobook">Audio Book</option>
+              </select>
             </div>
           </form>
         </div>
